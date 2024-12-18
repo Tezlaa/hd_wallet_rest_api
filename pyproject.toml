@@ -1,0 +1,10 @@
+[project]
+name = "hd_wallet"
+requires-python = "==3.11.4"
+
+[tool.ruff]
+line-length = 120
+exclude = [
+    "alembic/*",  # Ignore all Python files in the alembic directory and its subdirectories
+]
+preview = true

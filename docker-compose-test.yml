@@ -1,0 +1,48 @@
+services:
+    hd_wallet_test:
+        image: hd_wallet_test
+        restart: always
+        build:
+            context: .
+            dockerfile: Dockerfile
+        env_file:
+            - .env
+        environment:
+            - MODE=test
+            - POSTGRES_HOST=hd_wallet_db_test
+        volumes:
+            - ./:/app
+        ports:
+            - "8080:8080"
+        depends_on:
+            hd_wallet_db_test:
+                condition: service_healthy
+        networks:
+            - localhd_wallet_test
+
+    hd_wallet_db_test:
+        image: postgres:latest
+        env_file:
+            - .env
+        environment:
+            - POSTGRES_HOST=hd_wallet_db_test
+        volumes:
+            - database-hd-wallet-test:/var/lib/postgresql@17/data
+        ports:
+            - "5432:5432"
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U postgres"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 30s
+        networks:
+            - localhd_wallet_test
+
+volumes:
+    database-hd-wallet-test:
+
+networks:
+    localhd_wallet_test:
+        name: localhd_wallet_test
+        external: true

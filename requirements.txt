@@ -1,0 +1,14 @@
+ruff~=0.7.4
+uvicorn~=0.30.1
+SQLAlchemy~=2.0.30
+fastapi==0.115.6
+pydantic-settings==2.3.3
+httpx==0.27.0
+pytest~=8.1.1
+pytest-asyncio~=0.21.1
+web3==7.6.0
+eth-account==0.13.4
+bip-utils==2.9.3
+alembic==1.14.0
+asyncpg==0.29.0
+psycopg2-binary==2.9.10
